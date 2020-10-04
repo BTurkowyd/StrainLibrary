@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {% if form.number.errors %}
+                {{ form.number(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.number.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.number(class='form-control form-control-lg', placeholder='Number') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.name.errors %}
+                {{ form.name(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class='form-control form-control-lg', placeholder='Name') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.vector.errors %}
+                {{ form.vector(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.vector.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.vector(class='form-control form-control-lg', placeholder='Vector') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.vector_type.errors %}
+                {{ form.vector_type(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.vector_type.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.vector_type(class='form-control form-control-lg', placeholder='Vector type') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.selection_marker.errors %}
+                {{ form.selection_marker(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.selection_marker.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.selection_marker(class='form-control form-control-lg', placeholder='Selection marker') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.box.errors %}
+                {{ form.box(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.box.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.box(class='form-control form-control-lg', placeholder='Box') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.slot.errors %}
+                {{ form.slot(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.slot.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.slot(class='form-control form-control-lg', placeholder='Slot') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.date_of_creation.errors %}
+                {{ form.date_of_creation(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.date_of_creation.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.date_of_creation(class='form-control form-control-lg', placeholder='Date of creation (dd/mm/yyyy)') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.comments.errors %}
+                {{ form.comments(class='form-control form-control-lg is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.comments.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.comments(class='form-control form-control-lg', placeholder='Comments') }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class='btn btn-outline-info') }}
+        </div>
+    </form>
+</div>
+{% endblock content %}
