@@ -18,8 +18,9 @@ class User(db.Model, UserMixin):
 
 class Strain(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.String, nullable=False, unique=True)
+    number = db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
+    host = db.Column(db.String, nullable=False)
     vector = db.Column(db.String)
     vector_type = db.Column(db.String)
     selection_marker = db.Column(db.String)
@@ -31,3 +32,15 @@ class Strain(db.Model):
 
     def __repr__(self):
         return f"Strain('{self.number}', '{self.name}')"
+
+class Box(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False, unique=True)
+
+class Host(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False, unique=True)
+
+class SelectionMarker(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False, unique=True)

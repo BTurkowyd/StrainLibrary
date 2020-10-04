@@ -22,13 +22,21 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('search_strain') }}">Search strain</a>
+            </div>
             <div class="collapse navbar-collapse" id="navbarToggle">
-              <div class="navbar-nav mr-auto">
-                <!-- <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a> -->
-                <a class="nav-item nav-link" href="{{ url_for('search_strain') }}">Search strain</a>
-                <a class="nav-item nav-link" href="{{ url_for('new_strain') }}">New strain</a>
-                <a class="nav-item nav-link" href="{{ url_for('new_box') }}">New box</a>
-                <a class="nav-item nav-link" href="{{ url_for('new_host') }}">New host</a>
+              <div class="dropdown show mr-auto">
+                <a class="btn dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  New...
+                </a>
+              
+                <div class="dropdown-menu mr-auto" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="{{ url_for('new_strain') }}">New strain</a>
+                  <a class="dropdown-item" href="{{ url_for('new_box') }}">New box</a>
+                  <a class="dropdown-item" href="{{ url_for('new_host') }}">New host</a>
+                  <a class="dropdown-item" href="{{ url_for('new_selection_marker') }}">New selection marker</a>
+                </div>
               </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
