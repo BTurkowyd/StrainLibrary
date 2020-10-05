@@ -3,54 +3,58 @@
 <h1><b>{{ strain.number }}</b> {{ strain.name }}</h1>
 <br>
 <p>
-    Number: {{ strain.number }}
+  Host: {{ strain.host }}
 </p>
 <p>
-    Name: {{ strain.name }}
+  Number: {{ strain.number }}
 </p>
 <p>
-    Vector: {{ strain.vector }}
+  Name: {{ strain.name }}
 </p>
 <p>
-    Vector type: {{ strain.vector_type }}
+  Vector: {{ strain.vector }}
 </p>
 <p>
-    Selection marker: {{ strain.selection_marker }}
+  Vector type: {{ strain.vector_type }}
 </p>
 <p>
-    Box: {{ strain.box }}
+  Selection marker: {{ strain.selection_marker }}
 </p>
 <p>
-    Slot: {{ strain.slot }}
+  Box: {{ strain.box }}
 </p>
 <p>
-    Submission date: {{ strain.date_of_creation }}
+  Slot: {{ strain.slot }}
 </p>
 <p>
-    Comments: {{ strain.comments }}
+  Submission date: {{ strain.date_of_creation }}
+</p>
+<p>
+  Comments: {{ strain.comments }}
 </p>
 
 <div>
-    <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_strain', strain_id=strain.id) }}"> Update </a>
-    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+  <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_strain', strain_id=strain.id) }}"> Update </a>
+  <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
 </div>
-  <!-- Modal -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Delete Strain?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="{{ url_for('delete_strain', strain_id=strain.id) }}" method="POST">
-            <input class="btn btn-danger" type="submit" value="Delete">
-          </form>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Strain?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{{ url_for('delete_strain', strain_id=strain.id) }}" method="POST">
+          <input class="btn btn-danger" type="submit" value="Delete">
+        </form>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}

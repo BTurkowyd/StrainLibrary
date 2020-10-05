@@ -18,28 +18,108 @@ def home():
 def search_strain():
     return render_template('search_strain.html')
 
-@app.route('/new_strain', methods=['GET', 'POST'])
+@app.route('/select_host', methods=['GET', 'POST'])
+@login_required
+def select_host():
+    hosts = Host.query.all()
+    form = SelectHostForm()
+    form.host.choices = [(h.name, h.name) for h in Host.query.order_by('name')]
+    value = dict(form.host.choices).get(form.host.data)
+    if form.validate_on_submit():
+        return redirect(url_for('new_strain', host_id = value))
+    return render_template('select_host.html', form=form)
+
+@app.route('/new_strain/', methods=['GET', 'POST'])
 @login_required
 def new_strain():
+    host_id = request.args.get('host_id')
     hosts = Host.query.all()
     boxes = Box.query.all()
     selection_markers = SelectionMarker.query.all()
-    strain = EcoliStrain.query.order_by(desc(Strain.id))
     form = NewStrainForm()
-    form.host.choices = [(h.id, h.name) for h in Host.query.order_by('name')]
-    form.box.choices = [(b.id, b.name) for b in Box.query.order_by('name')]
-    form.selection_marker.choices = [(s.id, s.name) for s in SelectionMarker.query.order_by('name')]
-    if form.validate_on_submit():
-        new_strain = EcoliStrain(number=form.number.data, name=form.name.data, host=form.host.data, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
-        db.session.add(new_strain)
-        db.session.commit()
-        flash('Submitted succesfully!', 'success')
-        return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
-    elif request.method == 'GET':
-        try:
-            form.number.data = strain[0].number[:-1] + str(int(strain[0].number[-1]) + 1)
-        except IndexError:
-            form.number.data = None
+    form.host.choices = [host_id]
+    form.box.choices = [(b.name, b.name) for b in Box.query.order_by('name')]
+    form.selection_marker.choices = [(s.name, s.name) for s in SelectionMarker.query.order_by('name')]
+    if host_id == hosts[0].name:
+        if form.validate_on_submit():
+            new_strain = EcoliStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            db.session.add(new_strain)
+            db.session.commit()
+            flash('Submitted succesfully!', 'success')
+            return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
+        elif request.method == 'GET':
+            strain = EcoliStrain.query.order_by(desc(Strain.id))
+            try:
+                form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
+            except IndexError:
+                form.number.data = None
+    elif host_id == hosts[1].name:
+        if form.validate_on_submit():
+            new_strain = HvolcaniiStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            db.session.add(new_strain)
+            db.session.commit()
+            flash('Submitted succesfully!', 'success')
+            return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
+        elif request.method == 'GET':
+            strain = HvolcaniiStrain.query.order_by(desc(Strain.id))
+            try:
+                form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
+            except IndexError:
+                form.number.data = None
+    elif host_id == hosts[2].name:
+        if form.validate_on_submit():
+            new_strain = SpombeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            db.session.add(new_strain)
+            db.session.commit()
+            flash('Submitted succesfully!', 'success')
+            return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
+        elif request.method == 'GET':
+            strain = SpombeStrain.query.order_by(desc(Strain.id))
+            try:
+                form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
+            except IndexError:
+                form.number.data = None
+    elif host_id == hosts[3].name:
+        if form.validate_on_submit():
+            new_strain = ScerevisiaeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            db.session.add(new_strain)
+            db.session.commit()
+            flash('Submitted succesfully!', 'success')
+            return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
+        elif request.method == 'GET':
+            strain = ScerevisiaeStrain.query.order_by(desc(Strain.id))
+            try:
+                form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
+            except IndexError:
+                form.number.data = None
+    elif host_id == hosts[4].name:
+        if form.validate_on_submit():
+            new_strain = YenterocoliticaStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            db.session.add(new_strain)
+            db.session.commit()
+            flash('Submitted succesfully!', 'success')
+            return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
+        elif request.method == 'GET':
+            strain = YenterocoliticaStrain.query.order_by(desc(Strain.id))
+            try:
+                form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
+            except IndexError:
+                form.number.data = None
+    elif host_id == hosts[5].name:
+        if form.validate_on_submit():
+            new_strain = VparahaemolyticusStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            db.session.add(new_strain)
+            db.session.commit()
+            flash('Submitted succesfully!', 'success')
+            return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
+        elif request.method == 'GET':
+            strain = VparahaemolyticusStrain.query.order_by(desc(Strain.id))
+            try:
+                form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
+            except IndexError:
+                form.number.data = None
+    else:
+        flash('This host is not in the database. Please ask the admin to take care of it!', 'danger')
     return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
 
 @app.route('/new_box', methods=['GET', 'POST'])
@@ -113,7 +193,7 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route("/strain/<int:strain_id>")
+@app.route("/strain/<int:strain_id>/")
 @login_required
 def strain(strain_id):
     strain = Strain.query.get_or_404(strain_id)
