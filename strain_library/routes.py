@@ -24,13 +24,13 @@ def new_strain():
     hosts = Host.query.all()
     boxes = Box.query.all()
     selection_markers = SelectionMarker.query.all()
-    strain = Strain.query.order_by(desc(Strain.id))
+    strain = EcoliStrain.query.order_by(desc(Strain.id))
     form = NewStrainForm()
     form.host.choices = [(h.id, h.name) for h in Host.query.order_by('name')]
     form.box.choices = [(b.id, b.name) for b in Box.query.order_by('name')]
     form.selection_marker.choices = [(s.id, s.name) for s in SelectionMarker.query.order_by('name')]
     if form.validate_on_submit():
-        new_strain = Strain(number=form.number.data, name=form.name.data, host=form.host.data, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+        new_strain = EcoliStrain(number=form.number.data, name=form.name.data, host=form.host.data, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
         db.session.add(new_strain)
         db.session.commit()
         flash('Submitted succesfully!', 'success')

@@ -40,10 +40,10 @@ class NewStrainForm(FlaskForm):
     comments = TextAreaField('Comments', validators=[Optional()])
     submit = SubmitField('Submit')
 
-    # def validate_number(self, number):
-    #     strain = Strain.query.filter_by(number=number.data).first()
-    #     if strain:
-    #         raise ValidationError('This strain number is already in use.')
+    def validate_number(self, number):
+        strain = Strain.query.filter_by(number=number.data).first()
+        if strain:
+            raise ValidationError('This strain number is already in use.')
 
 class NewBoxForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
