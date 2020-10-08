@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
 class Strain(db.Model):
     __tablename__ = 'strain'
     id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.String, nullable=False)
+    number = db.Column(db.String, nullable=False, unique=True)
     name = db.Column(db.String, nullable=False)
     host = db.Column(db.String, nullable=False)
     vector = db.Column(db.String)

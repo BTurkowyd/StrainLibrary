@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileRequired, FileField, FileAllowed
+from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField, SelectField, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
@@ -39,8 +39,8 @@ class NewStrainForm(FlaskForm):
     host = SelectField('Host', validators=[DataRequired()])
     vector = StringField('Vector', validators=[Optional()])
     vector_type = StringField('Vector type', validators=[Optional()])
-    selection_marker = SelectMultipleField('Selection marker', validators=[Optional()])
-    box = SelectMultipleField('Box', validators=[DataRequired()])
+    selection_marker = SelectField('Selection marker', validators=[Optional()])
+    box = SelectField('Box', validators=[DataRequired()])
     slot = StringField('Slot', validators=[DataRequired()])
     date_of_creation = DateField(
         'Date of submission', format='%m/%d/%Y', validators=[Optional()])
@@ -90,5 +90,6 @@ class SelectHostForm(FlaskForm):
 
 
 class UploadMany(FlaskForm):
-    file = FileField('Table', validators=[FileRequired()])
+    host = SelectField('Host', validators=[DataRequired()])
+    file = FileField('Table', validators=[FileAllowed(['xls', 'xlsx'])])
     submit = SubmitField('Upload')

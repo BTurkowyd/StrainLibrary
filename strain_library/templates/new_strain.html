@@ -16,7 +16,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.host(class='form-control form-control-lg', placeholder='Host') }}
+                {{ form.host(class='form-control form-control-lg', placeholder='Host', readonly=true) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -28,7 +28,12 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.number(class='form-control form-control-lg', placeholder='Number') }}
+                    {% if legend == 'Update Strain' %}
+                        {{ form.number(class='form-control form-control-lg', placeholder='Number', readonly=true) }}
+                    {% else %}
+                        {{ form.number(class='form-control form-control-lg', placeholder='Number') }}
+                    {% endif %}
+                
                 {% endif %}
             </div>
             <div class="form-group">

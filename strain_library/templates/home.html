@@ -2,15 +2,11 @@
 {% block content %}
     <h1>Home page</h1>
     <br>
-    {% for strain in strains %}
     <article class="media">
         <div class="media-body">
-            <div class="article-metadata">
-                <p><a class="article-title" href="{{ url_for('strain', strain_id=strain.id) }}">{{ strain.number }} {{ strain.name }}</a></p>
-            </div>
+                <p>:)</p>
         </div>
     </article>
-    {% endfor %}
     <!-- {% for post in posts %}
         <article class="media content-section">
             <div class="media-body">

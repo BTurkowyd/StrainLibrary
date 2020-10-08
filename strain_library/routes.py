@@ -5,6 +5,8 @@ from strain_library import app, db, bcrypt
 from strain_library.forms import *
 from sqlalchemy import desc
 import pandas as pd
+from werkzeug.utils import secure_filename
+import os
 
 
 @app.route('/')
@@ -17,7 +19,16 @@ def home():
 @app.route('/search_strain')
 @login_required
 def search_strain():
-    return render_template('search_strain.html')
+    host = request.args.get('host')
+    box = request.args.get('box')
+    if host:
+        strains = Strain.query.filter_by(host=host).all()
+        return render_template('search_strain.html', strains=strains)
+    if box:
+        strains = Strain.query.filter_by(box=box).all()
+        return render_template('search_strain.html', strains=strains)
+    strains = Strain.query.all()
+    return render_template('search_strain.html', strains=strains)
 
 @app.route('/select_host', methods=['GET', 'POST'])
 @login_required
@@ -207,9 +218,9 @@ def update_strain(strain_id):
     hosts = Host.query.all()
     boxes = Box.query.all()
     form = NewStrainForm()
-    form.host.choices = [(h.id, h.name) for h in Host.query.order_by('name')]
-    form.box.choices = [(b.id, b.name) for b in Box.query.order_by('name')]
-    form.selection_marker.choices = [(s.id, s.name) for s in SelectionMarker.query.order_by('name')]
+    form.host.choices = [(h.name, h.name) for h in Host.query.order_by('name')]
+    form.box.choices = [(b.name, b.name) for b in Box.query.order_by('name')]
+    form.selection_marker.choices = [(s.name, s.name) for s in SelectionMarker.query.order_by('name')]
     if form.validate_on_submit():
         strain.number = form.number.data
         strain.name = form.name.data
@@ -252,19 +263,93 @@ def upload_many_select_host():
     form.host.choices = [(h.name, h.name) for h in Host.query.order_by('name')]
     value = dict(form.host.choices).get(form.host.data)
     if form.validate_on_submit():
-        flash(str(value), 'success')
-        return redirect(url_for('upload_many', host_id = value))
+        return redirect(url_for('upload_many', host_id=value))
     return render_template('select_host.html', form=form)
+
 
 @app.route("/upload_many", methods=['GET', 'POST'])
 @login_required
 def upload_many():
     host_id = request.args.get('host_id')
-    hosts = Host.query.all()
     form = UploadMany()
-    if form.validate_on_submit():
-        flash('The library has been uploaded!', 'success')
-        return redirect(url_for('home'))
-    else:
-        flash('The library has been uploaded!', 'danger')
+    form.host.choices = [host_id]
+    hosts = Host.query.all()
+    if host_id == hosts[0].name:   
+        if form.validate_on_submit():
+            if form.file:
+                strain_list = pd.read_excel(form.file.data)
+                for _, row in strain_list.iterrows():
+                    try:
+                        single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                    except AttributeError:
+                        single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                    db.session.add(single_strain)
+            db.session.commit()
+            flash('The library has been uploaded!', 'success')
+            return redirect(url_for('home'))
+    elif host_id == hosts[1].name:   
+        if form.validate_on_submit():
+            if form.file:
+                strain_list = pd.read_excel(form.file.data)
+                for _, row in strain_list.iterrows():
+                    try:
+                        single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                    except AttributeError:
+                        single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                    db.session.add(single_strain)
+            db.session.commit()
+            flash('The library has been uploaded!', 'success')
+            return redirect(url_for('home'))
+    elif host_id == hosts[2].name:   
+        if form.validate_on_submit():
+            if form.file:
+                strain_list = pd.read_excel(form.file.data)
+                for _, row in strain_list.iterrows():
+                    try:
+                        single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                    except AttributeError:
+                        single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                    db.session.add(single_strain)
+            db.session.commit()
+            flash('The library has been uploaded!', 'success')
+            return redirect(url_for('home'))
+    elif host_id == hosts[3].name:   
+        if form.validate_on_submit():
+            if form.file:
+                strain_list = pd.read_excel(form.file.data)
+                for _, row in strain_list.iterrows():
+                    try:
+                        single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                    except AttributeError:
+                        single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                    db.session.add(single_strain)
+            db.session.commit()
+            flash('The library has been uploaded!', 'success')
+            return redirect(url_for('home'))
+    elif host_id == hosts[4].name:   
+        if form.validate_on_submit():
+            if form.file:
+                strain_list = pd.read_excel(form.file.data)
+                for _, row in strain_list.iterrows():
+                    try:
+                        single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                    except AttributeError:
+                        single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                    db.session.add(single_strain)
+            db.session.commit()
+            flash('The library has been uploaded!', 'success')
+            return redirect(url_for('home'))
+    elif host_id == hosts[5].name:   
+        if form.validate_on_submit():
+            if form.file:
+                strain_list = pd.read_excel(form.file.data)
+                for _, row in strain_list.iterrows():
+                    try:
+                        single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                    except AttributeError:
+                        single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                    db.session.add(single_strain)
+            db.session.commit()
+            flash('The library has been uploaded!', 'success')
+            return redirect(url_for('home'))
     return render_template('upload_many.html', form=form)
