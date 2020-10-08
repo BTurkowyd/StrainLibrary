@@ -67,19 +67,19 @@
                 {{ form.vector_type(class='form-control form-control-lg', placeholder='Vector type') }}
                 {% endif %}
             </div>
-            <div class="form-group">
+            <div class="input-group mb-3">
                 {% if form.selection_marker.errors %}
-                {{ form.selection_marker(class='form-control form-control-lg is-invalid') }}
+                {{ form.selection_marker(class='') }}
                 <div class="invalid-feedback">
                     {% for error in form.selection_marker.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.selection_marker(class='form-control form-control-lg', placeholder='Selection marker') }}
+                {{ form.selection_marker(class='form-control', placeholder='Selection marker') }}
                 {% endif %}
             </div>
-            <div class="form-group">
+            <div class="input-group mb-3">
                 {% if form.box.errors %}
                 {{ form.box(class='form-control form-control-lg is-invalid') }}
                 <div class="invalid-feedback">
@@ -88,7 +88,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.box(class='form-control form-control-lg', placeholder='Box') }}
+                {{ form.box(class='form-control', placeholder='Box') }}
                 {% endif %}
             </div>
             <div class="form-group">

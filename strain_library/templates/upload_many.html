@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div>
+        <form action="" method="POST" class="md-form">
+            <fieldset>
+                <div>
+                    {{ form.file(class='file-path validate') }}
+                </div>
+            </fieldset>
+            <br>
+            <div class="form-group">
+                {{ form.submit(class='btn btn-primary btn-sm float-left') }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

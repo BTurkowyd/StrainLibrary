@@ -4,6 +4,7 @@ from strain_library.models import *
 from strain_library import app, db, bcrypt
 from strain_library.forms import *
 from sqlalchemy import desc
+import pandas as pd
 
 
 @app.route('/')
@@ -242,3 +243,28 @@ def delete_strain(strain_id):
     db.session.commit()
     flash('Your strain has been deleted!', 'success')
     return redirect(url_for('home'))
+
+@app.route("/upload_many_select_host", methods=['GET', 'POST'])
+@login_required
+def upload_many_select_host():
+    hosts = Host.query.all()
+    form = SelectHostForm()
+    form.host.choices = [(h.name, h.name) for h in Host.query.order_by('name')]
+    value = dict(form.host.choices).get(form.host.data)
+    if form.validate_on_submit():
+        flash(str(value), 'success')
+        return redirect(url_for('upload_many', host_id = value))
+    return render_template('select_host.html', form=form)
+
+@app.route("/upload_many", methods=['GET', 'POST'])
+@login_required
+def upload_many():
+    host_id = request.args.get('host_id')
+    hosts = Host.query.all()
+    form = UploadMany()
+    if form.validate_on_submit():
+        flash('The library has been uploaded!', 'success')
+        return redirect(url_for('home'))
+    else:
+        flash('The library has been uploaded!', 'danger')
+    return render_template('upload_many.html', form=form)
