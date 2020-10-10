@@ -6,14 +6,14 @@
         <fieldset class="form-group">
             <div class="form-group">
                 {% if form.name.errors %}
-                {{ form.name(class='form-control form-control-lg is-invalid') }}
+                {{ form.name(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.name.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.name(class='form-control form-control-lg', placeholder='Name') }}
+                {{ form.name(class='form-control', placeholder='Name') }}
                 {% endif %}
             </div>
         </fieldset>

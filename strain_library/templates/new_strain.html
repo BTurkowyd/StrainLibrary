@@ -9,19 +9,19 @@
             </legend>
             <div class="form-group">
                 {% if form.host.errors %}
-                {{ form.host(class='form-control form-control-lg is-invalid') }}
+                {{ form.host(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.host.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.host(class='form-control form-control-lg', placeholder='Host', readonly=true) }}
+                {{ form.host(class='form-control', placeholder='Host', readonly=true) }}
                 {% endif %}
             </div>
             <div class="form-group">
                 {% if form.number.errors %}
-                {{ form.number(class='form-control form-control-lg is-invalid') }}
+                {{ form.number(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.number.errors %}
                     <span>{{ error }}</span>
@@ -29,47 +29,47 @@
                 </div>
                 {% else %}
                     {% if legend == 'Update Strain' %}
-                        {{ form.number(class='form-control form-control-lg', placeholder='Number', readonly=true) }}
+                        {{ form.number(class='form-control', placeholder='Number', readonly=true) }}
                     {% else %}
-                        {{ form.number(class='form-control form-control-lg', placeholder='Number') }}
+                        {{ form.number(class='form-control', placeholder='Number') }}
                     {% endif %}
                 
                 {% endif %}
             </div>
             <div class="form-group">
                 {% if form.name.errors %}
-                {{ form.name(class='form-control form-control-lg is-invalid') }}
+                {{ form.name(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.name.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.name(class='form-control form-control-lg', placeholder='Name') }}
+                {{ form.name(class='form-control', placeholder='Name') }}
                 {% endif %}
             </div>
             <div class="form-group">
                 {% if form.vector.errors %}
-                {{ form.vector(class='form-control form-control-lg is-invalid') }}
+                {{ form.vector(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.vector.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.vector(class='form-control form-control-lg', placeholder='Vector') }}
+                {{ form.vector(class='form-control', placeholder='Vector') }}
                 {% endif %}
             </div>
             <div class="form-group">
                 {% if form.vector_type.errors %}
-                {{ form.vector_type(class='form-control form-control-lg is-invalid') }}
+                {{ form.vector_type(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.vector_type.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.vector_type(class='form-control form-control-lg', placeholder='Vector type') }}
+                {{ form.vector_type(class='form-control', placeholder='Vector type') }}
                 {% endif %}
             </div>
             <div class="input-group mb-3">
@@ -86,7 +86,7 @@
             </div>
             <div class="input-group mb-3">
                 {% if form.box.errors %}
-                {{ form.box(class='form-control form-control-lg is-invalid') }}
+                {{ form.box(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.box.errors %}
                     <span>{{ error }}</span>
@@ -98,38 +98,38 @@
             </div>
             <div class="form-group">
                 {% if form.slot.errors %}
-                {{ form.slot(class='form-control form-control-lg is-invalid') }}
+                {{ form.slot(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.slot.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.slot(class='form-control form-control-lg', placeholder='Slot') }}
+                {{ form.slot(class='form-control', placeholder='Slot') }}
                 {% endif %}
             </div>
             <div class="form-group">
                 {% if form.date_of_creation.errors %}
-                {{ form.date_of_creation(class='form-control form-control-lg is-invalid') }}
+                {{ form.date_of_creation(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.date_of_creation.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.date_of_creation(class='form-control form-control-lg', placeholder='Date of creation (dd/mm/yyyy)') }}
+                {{ form.date_of_creation(class='form-control', placeholder='Date of creation (dd/mm/yyyy)') }}
                 {% endif %}
             </div>
             <div class="form-group">
                 {% if form.comments.errors %}
-                {{ form.comments(class='form-control form-control-lg is-invalid') }}
+                {{ form.comments(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.comments.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.comments(class='form-control form-control-lg', placeholder='Comments') }}
+                {{ form.comments(class='form-control', placeholder='Comments') }}
                 {% endif %}
             </div>
         </fieldset>

@@ -9,14 +9,14 @@
             </legend>
             <div class="form-group">
                 {% if form.host.errors %}
-                {{ form.host(class='form-control form-control-lg is-invalid') }}
+                {{ form.host(class='form-control is-invalid') }}
                 <div class="invalid-feedback">
                     {% for error in form.host.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.host(class='form-control form-control-lg', placeholder='Host') }}
+                {{ form.host(class='form-control', placeholder='Host') }}
                 {% endif %}
             </div>
         </fieldset>

@@ -1,35 +1,117 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Search strain</h1>
-
-    <table class="table table-sm table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Number</th>
-            <th scope="col">Name</th>
-            <th scope="col">Host</th>
-            <th scope="col">Vector</th>
-            <th scope="col">Vector type</th>
-            <th scope="col">Selection marker</th>
-            <th scope="col">Box</th>
-            <th scope="col">Slot</th>
-            <th scope="col">Date of creation</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for strain in strains %}
-            <tr>
-                <th scope="row" ><a class="article-title" href="{{ url_for('strain', strain_id=strain.id) }}">{{ strain.number }}</a></th>
-                <td><a class="article-title" href="{{ url_for('strain', strain_id=strain.id) }}">{{ strain.name }}</a></td>
-                <td><i><a class="article-title" href="{{ url_for('search_strain', host=strain.host) }}">{{ strain.host }}</a></i></td>
-                <td>{{ strain.vector }}</td>
-                <td>{{ strain.vector_type }}</td>
-                <td>{{ strain.selection_marker }}</td>
-                <td><a class="article-title" href="{{ url_for('search_strain', box=strain.box) }}">{{ strain.box }}</a></td>
-                <td>{{ strain.slot }}</td>
-                <td>{{ strain.date_of_creation }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-      </table>
+<div>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                {{ legend }}
+            </legend>
+            <div class="form-group">
+                {% if form.host.errors %}
+                {{ form.host(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.host.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.host(class='form-control', placeholder='Host') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.number.errors %}
+                {{ form.number(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.number.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {% if legend == 'Update Strain' %}
+                        {{ form.number(class='form-control', placeholder='Number', readonly=true) }}
+                    {% else %}
+                        {{ form.number(class='form-control', placeholder='Number') }}
+                    {% endif %}
+                
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.name.errors %}
+                {{ form.name(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class='form-control', placeholder='Name') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.vector.errors %}
+                {{ form.vector(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.vector.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.vector(class='form-control', placeholder='Vector') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.vector_type.errors %}
+                {{ form.vector_type(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.vector_type.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.vector_type(class='form-control', placeholder='Vector type') }}
+                {% endif %}
+            </div>
+            <div class="input-group mb-3">
+                {% if form.selection_marker.errors %}
+                {{ form.selection_marker(class='') }}
+                <div class="invalid-feedback">
+                    {% for error in form.selection_marker.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.selection_marker(class='form-control', placeholder='Selection marker') }}
+                {% endif %}
+            </div>
+            <div class="input-group mb-3">
+                {% if form.box.errors %}
+                {{ form.box(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.box.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.box(class='form-control', placeholder='Box') }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.slot.errors %}
+                {{ form.slot(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for error in form.slot.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.slot(class='form-control', placeholder='Slot') }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class='btn btn-outline-info') }}
+        </div>
+    </form>
+</div>
 {% endblock content %}

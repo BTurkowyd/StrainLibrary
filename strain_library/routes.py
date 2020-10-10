@@ -16,19 +16,37 @@ def home():
     strains = Strain.query.all()
     return render_template('home.html', strains=strains)
 
-@app.route('/search_strain')
+@app.route('/search_strain', methods=['GET', 'POST'])
 @login_required
 def search_strain():
+    form = SearchStrainForm()
+    form.host.choices = [(h.name, h.name) for h in Host.query.order_by('name')]
+    if form.validate_on_submit():
+        query_host = Strain.host.contains(form.host.data)
+        query_number = Strain.number.contains(form.number.data)
+        query_name = Strain.name.contains(form.name.data)
+        query_vector = Strain.vector.contains(form.vector.data)
+        query_vector_type = Strain.vector_type.contains(form.vector_type.data)
+        query_selection_marker = Strain.selection_marker.contains(form.selection_marker.data)
+        query_box = Strain.box.contains(form.box.data)
+        query_slot = Strain.slot.contains(form.slot.data)
+        strains = Strain.query.filter(query_number, query_name, query_host, query_vector, query_vector_type, query_selection_marker, query_box, query_slot).all()
+        return render_template('results.html', strains=strains)
+    return render_template('search_strain.html', form=form, legend='Search strain')
+
+@app.route('/results')
+@login_required
+def results():
     host = request.args.get('host')
     box = request.args.get('box')
     if host:
         strains = Strain.query.filter_by(host=host).all()
-        return render_template('search_strain.html', strains=strains)
+        return render_template('results.html', strains=strains)
     if box:
         strains = Strain.query.filter_by(box=box).all()
-        return render_template('search_strain.html', strains=strains)
+        return render_template('results.html', strains=strains)
     strains = Strain.query.all()
-    return render_template('search_strain.html', strains=strains)
+    return render_template('results.html', strains=strains)
 
 @app.route('/select_host', methods=['GET', 'POST'])
 @login_required
@@ -278,6 +296,25 @@ def upload_many():
         if form.validate_on_submit():
             if form.file:
                 strain_list = pd.read_excel(form.file.data)
+                df_boxes = strain_list['Box'].to_list()
+                for df_b in df_boxes:
+                    box = Box.query.filter_by(name=df_b).first()
+                    if not box:
+                        new_box = Box(name=df_b)
+                        db.session.add(new_box)
+                    else:
+                        pass
+
+                df_selection_markers = strain_list['Selection marker'].to_list()
+                for df_sm in df_selection_markers:
+                    sm = SelectionMarker.query.filter_by(name=df_sm).first()
+                    if not sm:
+                        new_selection_marker = SelectionMarker(name=df_sm)
+                        db.session.add(new_selection_marker)
+                    else:
+                        pass
+
+                db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
                         single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
@@ -291,6 +328,25 @@ def upload_many():
         if form.validate_on_submit():
             if form.file:
                 strain_list = pd.read_excel(form.file.data)
+                df_boxes = strain_list['Box'].to_list()
+                for df_b in df_boxes:
+                    box = Box.query.filter_by(name=df_b).first()
+                    if not box:
+                        new_box = Box(name=df_b)
+                        db.session.add(new_box)
+                    else:
+                        pass
+
+                df_selection_markers = strain_list['Selection marker'].to_list()
+                for df_sm in df_selection_markers:
+                    sm = SelectionMarker.query.filter_by(name=df_sm).first()
+                    if not sm:
+                        new_selection_marker = SelectionMarker(name=df_sm)
+                        db.session.add(new_selection_marker)
+                    else:
+                        pass
+
+                db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
                         single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
@@ -304,6 +360,25 @@ def upload_many():
         if form.validate_on_submit():
             if form.file:
                 strain_list = pd.read_excel(form.file.data)
+                df_boxes = strain_list['Box'].to_list()
+                for df_b in df_boxes:
+                    box = Box.query.filter_by(name=df_b).first()
+                    if not box:
+                        new_box = Box(name=df_b)
+                        db.session.add(new_box)
+                    else:
+                        pass
+
+                df_selection_markers = strain_list['Selection marker'].to_list()
+                for df_sm in df_selection_markers:
+                    sm = SelectionMarker.query.filter_by(name=df_sm).first()
+                    if not sm:
+                        new_selection_marker = SelectionMarker(name=df_sm)
+                        db.session.add(new_selection_marker)
+                    else:
+                        pass
+
+                db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
                         single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
@@ -317,6 +392,25 @@ def upload_many():
         if form.validate_on_submit():
             if form.file:
                 strain_list = pd.read_excel(form.file.data)
+                df_boxes = strain_list['Box'].to_list()
+                for df_b in df_boxes:
+                    box = Box.query.filter_by(name=df_b).first()
+                    if not box:
+                        new_box = Box(name=df_b)
+                        db.session.add(new_box)
+                    else:
+                        pass
+
+                df_selection_markers = strain_list['Selection marker'].to_list()
+                for df_sm in df_selection_markers:
+                    sm = SelectionMarker.query.filter_by(name=df_sm).first()
+                    if not sm:
+                        new_selection_marker = SelectionMarker(name=df_sm)
+                        db.session.add(new_selection_marker)
+                    else:
+                        pass
+
+                db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
                         single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
@@ -330,6 +424,25 @@ def upload_many():
         if form.validate_on_submit():
             if form.file:
                 strain_list = pd.read_excel(form.file.data)
+                df_boxes = strain_list['Box'].to_list()
+                for df_b in df_boxes:
+                    box = Box.query.filter_by(name=df_b).first()
+                    if not box:
+                        new_box = Box(name=df_b)
+                        db.session.add(new_box)
+                    else:
+                        pass
+
+                df_selection_markers = strain_list['Selection marker'].to_list()
+                for df_sm in df_selection_markers:
+                    sm = SelectionMarker.query.filter_by(name=df_sm).first()
+                    if not sm:
+                        new_selection_marker = SelectionMarker(name=df_sm)
+                        db.session.add(new_selection_marker)
+                    else:
+                        pass
+
+                db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
                         single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
@@ -343,6 +456,25 @@ def upload_many():
         if form.validate_on_submit():
             if form.file:
                 strain_list = pd.read_excel(form.file.data)
+                df_boxes = strain_list['Box'].to_list()
+                for df_b in df_boxes:
+                    box = Box.query.filter_by(name=df_b).first()
+                    if not box:
+                        new_box = Box(name=df_b)
+                        db.session.add(new_box)
+                    else:
+                        pass
+
+                df_selection_markers = strain_list['Selection marker'].to_list()
+                for df_sm in df_selection_markers:
+                    sm = SelectionMarker.query.filter_by(name=df_sm).first()
+                    if not sm:
+                        new_selection_marker = SelectionMarker(name=df_sm)
+                        db.session.add(new_selection_marker)
+                    else:
+                        pass
+                    
+                db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
                         single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
@@ -352,4 +484,6 @@ def upload_many():
             db.session.commit()
             flash('The library has been uploaded!', 'success')
             return redirect(url_for('home'))
+    
+   
     return render_template('upload_many.html', form=form)

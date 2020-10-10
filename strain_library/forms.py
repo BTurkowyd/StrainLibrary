@@ -93,3 +93,17 @@ class UploadMany(FlaskForm):
     host = SelectField('Host', validators=[DataRequired()])
     file = FileField('Table', validators=[FileAllowed(['xls', 'xlsx'])])
     submit = SubmitField('Upload')
+
+class SearchStrainForm(FlaskForm):
+    number = StringField('Number', validators=[Optional()])
+    name = StringField('Name', validators=[Optional()])
+    host = SelectField('Host', validators=[Optional()])
+    vector = StringField('Vector', validators=[Optional()])
+    vector_type = StringField('Vector type', validators=[Optional()])
+    selection_marker = StringField('Selection marker', validators=[Optional()])
+    box = StringField('Box', validators=[Optional()])
+    slot = StringField('Slot', validators=[Optional()])
+    # date_of_creation = DateField(
+    #     'Date of submission', format='%m/%d/%Y', validators=[Optional()])
+    # comments = TextAreaField('Comments', validators=[Optional()])
+    submit = SubmitField('Submit')
