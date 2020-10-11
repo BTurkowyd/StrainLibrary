@@ -82,7 +82,7 @@ def new_strain():
             try:
                 form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
             except IndexError:
-                form.number.data = None
+                form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[1].name:
         if form.validate_on_submit():
             new_strain = HvolcaniiStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
@@ -95,7 +95,7 @@ def new_strain():
             try:
                 form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
             except IndexError:
-                form.number.data = None
+                form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[2].name:
         if form.validate_on_submit():
             new_strain = SpombeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
@@ -108,7 +108,7 @@ def new_strain():
             try:
                 form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
             except IndexError:
-                form.number.data = None
+                form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[3].name:
         if form.validate_on_submit():
             new_strain = ScerevisiaeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
@@ -121,7 +121,7 @@ def new_strain():
             try:
                 form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
             except IndexError:
-                form.number.data = None
+                form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[4].name:
         if form.validate_on_submit():
             new_strain = YenterocoliticaStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
@@ -134,7 +134,7 @@ def new_strain():
             try:
                 form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
             except IndexError:
-                form.number.data = None
+                form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[5].name:
         if form.validate_on_submit():
             new_strain = VparahaemolyticusStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
@@ -147,7 +147,7 @@ def new_strain():
             try:
                 form.number.data = strain[0].number[:2] + str(int(strain[0].number[2:]) + 1)
             except IndexError:
-                form.number.data = None
+                form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     else:
         flash('This host is not in the database. Please ask the admin to take care of it!', 'danger')
     return render_template('new_strain.html', form=form, hosts=hosts, boxes=boxes, selection_markers=selection_markers, legend='New strain')
