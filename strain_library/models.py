@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    Strain = db.relationship('Strain', backref='author', lazy=True)
+    strain = db.relationship('Strain', backref='author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
@@ -30,6 +30,7 @@ class Strain(db.Model):
     date_of_creation = db.Column(db.Date)
     comments = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    box_id = db.Column(db.Integer, db.ForeignKey('box.id'), nullable=False)
     type = db.Column(db.String)
 
     __mapper_args__ = {
@@ -85,6 +86,7 @@ class YenterocoliticaStrain(Strain):
 class Box(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
+    strain = db.relationship('Strain', backref='box_name', lazy=True)
 
 class Host(db.Model):
     id = db.Column(db.Integer, primary_key=True)

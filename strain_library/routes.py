@@ -317,9 +317,9 @@ def upload_many():
                 db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
-                        single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                        single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     except AttributeError:
-                        single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                        single_strain = EcoliStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     db.session.add(single_strain)
             db.session.commit()
             flash('The library has been uploaded!', 'success')
@@ -349,9 +349,9 @@ def upload_many():
                 db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
-                        single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                        single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     except AttributeError:
-                        single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                        single_strain = HvolcaniiStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     db.session.add(single_strain)
             db.session.commit()
             flash('The library has been uploaded!', 'success')
@@ -381,9 +381,9 @@ def upload_many():
                 db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
-                        single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                        single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     except AttributeError:
-                        single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                        single_strain = SpombeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     db.session.add(single_strain)
             db.session.commit()
             flash('The library has been uploaded!', 'success')
@@ -413,9 +413,9 @@ def upload_many():
                 db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
-                        single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                        single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     except AttributeError:
-                        single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                        single_strain = ScerevisiaeStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     db.session.add(single_strain)
             db.session.commit()
             flash('The library has been uploaded!', 'success')
@@ -445,9 +445,9 @@ def upload_many():
                 db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
-                        single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                        single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     except AttributeError:
-                        single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                        single_strain = YenterocoliticaStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     db.session.add(single_strain)
             db.session.commit()
             flash('The library has been uploaded!', 'success')
@@ -477,9 +477,9 @@ def upload_many():
                 db.session.commit()
                 for _, row in strain_list.iterrows():
                     try:
-                        single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user)
+                        single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=row['Date of creation'].date(), comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     except AttributeError:
-                        single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user)
+                        single_strain = VparahaemolyticusStrain(number=row['Number'], name=row['Name'], host=host_id, vector=row['Vector'], vector_type=row['Vector type'], selection_marker=row['Selection marker'], box=row['Box'], slot=row['Slot'], date_of_creation=None, comments=row['Comments'], author=current_user, box_id=Box.query.filter_by(name=row['Box']).first().id)
                     db.session.add(single_strain)
             db.session.commit()
             flash('The library has been uploaded!', 'success')
