@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <style>
+          .box-grid {
+            display: grid;
+            grid-template-columns: repeat(9,70px);
+            grid-auto-rows: 70px;
+            gap: 5px 5px;
+        }
+
+        .div-1 {
+            background-color: #06a80050;
+            text-align: center;
+        }
+        
+        .div-2 {
+            background-color: #f1050570;
+            text-align: center;
+        }
+        
+    </style>
+
+    <h1>{{box.name}}</h1>
+    <br>
+    <br>
+    <div class="box-grid">
+        {% for row in rows %}
+            {% for column in columns %}
+                {% set ns = namespace(free=true) %} 
+                {% for strain in box.strain %}
+                        {% if strain.slot == row+column %}
+                            <div class="div-2">
+                                <a class="article-title" href="{{ url_for('strain', strain_id=strain.id) }}">{{row}}{{column}}
+                                    <br>
+                                    {{ strain.number }}
+                                </a> 
+                            </div>
+                            {% set ns.free = false %}
+                        {% endif %}
+                {% endfor %}
+                {% if ns.free == true %}
+                    <div class="div-1"> {{row}}{{column}} </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock content %}

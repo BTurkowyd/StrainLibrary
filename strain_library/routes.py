@@ -487,3 +487,11 @@ def upload_many():
     
    
     return render_template('upload_many.html', form=form)
+
+@app.route("/box", methods=['GET', 'POST'])
+@login_required
+def show_box():
+    box = Box.query.first()
+    columns = ['1','2','3','4','5','6','7','8','9']
+    rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+    return render_template('box.html', columns=columns, rows=rows, box=box)
