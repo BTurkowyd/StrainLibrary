@@ -72,7 +72,7 @@ def new_strain():
     form.selection_marker.choices = [(s.name, s.name) for s in SelectionMarker.query.order_by('name')]
     if host_id == hosts[0].name:
         if form.validate_on_submit():
-            new_strain = EcoliStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            new_strain = EcoliStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user, box_id=Box.query.filter_by(name=form.box.data).first().id)
             db.session.add(new_strain)
             db.session.commit()
             flash('Submitted succesfully!', 'success')
@@ -85,7 +85,7 @@ def new_strain():
                 form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[1].name:
         if form.validate_on_submit():
-            new_strain = HvolcaniiStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            new_strain = HvolcaniiStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user, box_id=Box.query.filter_by(name=form.box.data).first().id)
             db.session.add(new_strain)
             db.session.commit()
             flash('Submitted succesfully!', 'success')
@@ -98,7 +98,7 @@ def new_strain():
                 form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[2].name:
         if form.validate_on_submit():
-            new_strain = SpombeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            new_strain = SpombeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user, box_id=Box.query.filter_by(name=form.box.data).first().id)
             db.session.add(new_strain)
             db.session.commit()
             flash('Submitted succesfully!', 'success')
@@ -111,7 +111,7 @@ def new_strain():
                 form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[3].name:
         if form.validate_on_submit():
-            new_strain = ScerevisiaeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            new_strain = ScerevisiaeStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user, box_id=Box.query.filter_by(name=form.box.data).first().id)
             db.session.add(new_strain)
             db.session.commit()
             flash('Submitted succesfully!', 'success')
@@ -124,7 +124,7 @@ def new_strain():
                 form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[4].name:
         if form.validate_on_submit():
-            new_strain = YenterocoliticaStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            new_strain = YenterocoliticaStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user, box_id=Box.query.filter_by(name=form.box.data).first().id)
             db.session.add(new_strain)
             db.session.commit()
             flash('Submitted succesfully!', 'success')
@@ -137,7 +137,7 @@ def new_strain():
                 form.number.data = (host_id.split()[0][0] + host_id.split()[1][0] + str(1)).upper()
     elif host_id == hosts[5].name:
         if form.validate_on_submit():
-            new_strain = VparahaemolyticusStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user)
+            new_strain = VparahaemolyticusStrain(number=form.number.data, name=form.name.data, host=host_id, vector=form.vector.data, vector_type=form.vector_type.data, selection_marker=form.selection_marker.data, box=form.box.data, slot=form.slot.data, date_of_creation=form.date_of_creation.data, comments=form.comments.data, author=current_user, box_id=Box.query.filter_by(name=form.box.data).first().id)
             db.session.add(new_strain)
             db.session.commit()
             flash('Submitted succesfully!', 'success')
@@ -488,10 +488,22 @@ def upload_many():
    
     return render_template('upload_many.html', form=form)
 
-@app.route("/box", methods=['GET', 'POST'])
+@app.route('/select_box', methods=['GET', 'POST'])
+@login_required
+def select_box():
+    hosts = Box.query.all()
+    form = SelectBoxForm()
+    form.box.choices = [(b.name, b.name) for b in Box.query.order_by('name')]
+    value = dict(form.box.choices).get(form.box.data)
+    if form.validate_on_submit():
+        return redirect(url_for('show_box', box_id = value))
+    return render_template('select_box.html', form=form)
+
+@app.route("/show_box", methods=['GET', 'POST'])
 @login_required
 def show_box():
-    box = Box.query.first()
+    box_id = request.args.get('box_id')
+    box = Box.query.filter_by(name=box_id).first()
     columns = ['1','2','3','4','5','6','7','8','9']
     rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
     return render_template('box.html', columns=columns, rows=rows, box=box)

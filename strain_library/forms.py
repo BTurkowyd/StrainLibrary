@@ -88,6 +88,9 @@ class SelectHostForm(FlaskForm):
     host = SelectField('Host', validators=[DataRequired()])
     submit = SubmitField('Next')
 
+class SelectBoxForm(FlaskForm):
+    box = SelectField('Box', validators=[DataRequired()])
+    submit = SubmitField('Next')
 
 class UploadMany(FlaskForm):
     host = SelectField('Host', validators=[DataRequired()])
