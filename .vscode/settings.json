@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\verti\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
+    "python.pythonPath": "/Users/bartoszturkowyd/.virtualenvs/strain_library/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
